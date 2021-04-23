@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>SRM BlogSite</title>
+    <link rel="stylesheet" href="./public/main.css">
+</head>
+<body>
+    <h1>Welcome to the SRM BLOG SITE</h1>
+    <a href="index.html">Home</a>
+
+    <main>
+        <form method="POST" id="createForm" action=>
+            <p>Fill the form to create a new post.</p>
+            <input type="text" id="title" placeholder="Post Title">
+            <textarea id="content" placeholder="Your Post Content Here"></textarea>
+            <input type="file" id="cover">
+            <input type="submit" value="Submit" id="postSubmit">
+
+        </form>
+        
+        <div id="progressHandler">
+            <p>Processing the request, please wait </p>
+            <progress id="progressBar" value="" max="100"></progress>
+        </div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+    <script src="/Functions/main.js"></script>
+
+</body>
+</html>
