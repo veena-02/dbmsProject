@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Candal|Lora" rel="stylesheet">
+
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>Login</title>
+</head>
+
+<body>
+  <header>
+    <div class="logo">
+      <h1 class="logo-text"><span>Tech</span>Inspires</h1>
+    </div>
+    <i class="fa fa-bars menu-toggle"></i>
+    <ul class="nav">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="register.html">Sign Up</a></li>
+      <li><a href="login.html">Login</a></li>
+
+    </ul>
+  </header>
+
+  <div class="auth-content">
+
+    <form action="login.html" method="post" id="login-form">
+      <h2 class="form-title">Login</h2>
+
+      <div>
+        <label>Email</label>
+        <input id="login-email" type="email" name="username" class="text-input">
+      </div>
+      <div>
+        <label>Password</label>
+        <input id="login-password" type="password" name="password" class="text-input">
+      </div>
+      <div>
+        <button type="submit" name="login-btn" class="btn btn-big">Login</button>
+      </div>
+      <p>Or <a href="register.html">Sign Up</a></p>
+    </form>
+
+  </div>
+
+
+  <!-- JQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Custom Script -->
+  <script src="js/scripts.js"></script>
+
+  
+  <!--Firebase Config-->
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-auth.js"></script>
+
+  <script>
+    const config={
+    apiKey: "AIzaSyDp9yhCDXdwoPReBZa3h_QPHod4h3Lpd6E",
+    authDomain: "dbms-blogproject-30713.firebaseapp.com",
+    projectId: "dbms-blogproject-30713",
+    storageBucket: "dbms-blogproject-30713.appspot.com",
+    messagingSenderId: "1024664724591",
+    appId: "1:1024664724591:web:6e48630bc56cca8605d99a",
+    measurementId: "G-YS6Z2RX0TN"
+    }
+    firebase.initializeApp(config);
+    //FireStore
+    const firestore = firebase.firestore(); 
+    const auth = firebase.auth();
+  
+  </script>
+  
+  <script src="/Functions/main.js"></script>
+  
+</body>
+
+</html>

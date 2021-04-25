@@ -1,21 +1,120 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=, initial-scale=1.0">
-    <title>SRM BlogSite</title>
-    <link rel="stylesheet" href="./public/main.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Candal|Lora" rel="stylesheet">
+
+  <!-- Custom Styling -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <title>About</title>
 </head>
+
 <body>
-    <h1>Welcome to the SRM BLOG SITE</h1>
-    <a href="create.html">Create a new post</a>
-    <div id="posts"></div>
+  <header>
+    <div class="logo">
+      <h1 class="logo-text"><span>Tech</span>Inspires</h1>
+    </div>
+    <i class="fa fa-bars menu-toggle"></i>
+    <ul class="nav">
+      <li><a href="index.html">Home</a></li>
+     <li><a href="register.html">Sign Up</a></li>
+      <li><a href="login.html">Login</a></li> 
+      
+    </ul>
+  </header>
+
+  <!-- Page Wrapper -->
+  <div class="page-wrapper">
+
+    <!-- Content -->
+    <div class="content clearfix">
+
+      <!-- Main Content Wrapper -->
+      <div class="main-content-wrapper">
+        <div class="main-content single">
+          <h1 class="post-title">About</h1>
+        
+          <div class="post-content">
+          </div>
+          <p>Technical blogging is a great way to share your expertise while building a potentially valuable readership.</p>
+          <p> It can help you to document projects, or provide guidance .</p>
+          <p>Tech Inspires is all about the Technologies which inspires one. It is the integration of various club</p>
+          <p>The various club of different field come together to share the young mind ideas.</p>
+          <p>Tech inspires have all kind of blogs related to technology where one can get motivated to particiate in all the domain</p>
+
+        </div>
+      </div>
 
 
+    </div>
+    <!-- // Content -->
 
-<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
-<script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
-<script src="/Functions/main.js"></script>
+  </div>
+  <!-- // Page Wrapper -->
+
+  <!-- footer -->
+  <div class="footer">
+    <div class="footer-content">
+
+      <div class="footer-section about">
+        <h1 class="logo-text"><span>Tech</span>Inspires</h1>
+        <p>
+          Tech Inspires is a blog conceived for the purpose to inspire young minds.
+      </p>
+        <div class="contact">
+          <span><i class="fas fa-phone"></i> &nbsp; 7088234567</span>
+          <span><i class="fas fa-envelope"></i> &nbsp; techinspires@gmail.com</span>
+        </div>
+        <div class="socials">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+
+
+      <div class="footer-section contact-form">
+        <h2>Contact us</h2>
+        <br>
+        <form action="index.html" method="post">
+          <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
+          <textarea rows="4" name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
+          <button type="submit" class="btn btn-big contact-btn">
+            <i class="fas fa-envelope"></i>
+            Send
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      &copy; Designed by Tech Inspires
+    </div>
+  </div>
+  <!-- // footer -->
+
+
+  <!-- JQuery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- Slick Carousel -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+  <!-- Custom Script -->
+  <script src="js/scripts.js"></script>
+
 </body>
+
 </html>

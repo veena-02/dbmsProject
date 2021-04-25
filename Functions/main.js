@@ -1,15 +1,3 @@
-const config={
-    apiKey: "AIzaSyDp9yhCDXdwoPReBZa3h_QPHod4h3Lpd6E",
-    authDomain: "dbms-blogproject-30713.firebaseapp.com",
-    projectId: "dbms-blogproject-30713",
-    storageBucket: "dbms-blogproject-30713.appspot.com",
-    messagingSenderId: "1024664724591",
-    appId: "1:1024664724591:web:6e48630bc56cca8605d99a",
-    measurementId: "G-YS6Z2RX0TN"
-}
-firebase.initializeApp(config);
-const firestore = firebase.firestore(); 
-
 const posts = document.querySelector("#posts");
 const post = document.querySelector(".post");
 const progressHandler=document.querySelector("#progressHandler");
@@ -27,14 +15,21 @@ let currentTitle;
 let currentId;
 let currentContent;
 let oldPostCover;
+let currUser=false;
+
+const signupForm = document.querySelector("#signup-form");
+const loginForm = document.querySelector("#login-form");
+const logoutButton = document.querySelector("#logout");
 
 const getPosts = async()=>{
+    
     let postsArray = [];
     let docs = await firebase.firestore().collection("posts").get().catch(err=>console.log(err));
     docs.forEach(doc=>{
         postsArray.push({"id":doc.id,"data":doc.data()});
     });   
     createChildren(postsArray);
+    console.log(currUser);
 }
 
 const getPost = async() => {
@@ -69,24 +64,33 @@ const getPost = async() => {
 const createChild = (postData) => {
     if(singlePost !== null){
         let div = document.createElement("div");
+        div.setAttribute("class", "post_div")
         console.log(div);
+
+        let div2 = document.createElement("div");
+        div2.setAttribute("class", "post_innerdiv")
 
         let img = document.createElement("img");
         img.setAttribute("src",postData.cover);
+        img.setAttribute("class","post_img")
         console.log(img);
 
         let title = document.createElement("h3");
+        title.setAttribute("class","post_title");
         let titleNode = document.createTextNode(postData.title);
         title.appendChild(titleNode);
         console.log(title);
 
         let content = document.createElement("div");
+        content.setAttribute("class","post_content");
         let contentNode = document.createTextNode(postData.content);
         content.appendChild(contentNode);
+        div2.appendChild(img);
+        div2.appendChild(content);
 
-        div.appendChild(img);
         div.appendChild(title);
-        div.appendChild(content);
+        div.appendChild(div2);
+        
 
         singlePost.appendChild(div);
     }
@@ -133,6 +137,8 @@ const appendEditForm =async ()=>{
 
     let contentTextarea = document.createElement("textarea");
     contentTextarea.setAttribute("id", "editContent");
+    contentTextarea.setAttribute("rows", "12");
+
 
     let coverFile = document.createElement("input");
     coverFile.setAttribute("type", "file");
@@ -242,6 +248,52 @@ const removeEditForm = () => {
     let editForm = document.getElementById("editForm");
     editFormContainer.removeChild(editForm);
 }
+if(signupForm != null){
+    signupForm.addEventListener('submit',(e)=>{
+        e.preventDefault();
+
+        //get user info
+        const email = signupForm['signup-email'].value;
+        const password = signupForm['signup-password'].value;
+
+        //signup a user
+        firebase.auth().createUserWithEmailAndPassword(email, password).then(cred => {
+            console.log(cred);
+            alert("Signed Up Successfully");
+            window.location.replace("aboutus.html");
+        })
+        //signOut
+       
+
+    })
+}
+
+if(logoutButton !== null){
+    logout.addEventListener('click',(e)=>{
+        e.preventDefault();
+        window.location.replace("index.html");
+       
+    })
+}
+
+if(loginForm != null){
+    loginForm.addEventListener('submit',(e)=>{
+        e.preventDefault();
+
+        //get user info
+        const email = loginForm['login-email'].value;
+        const password = loginForm['login-password'].value;
+
+        //signIn a user
+        firebase.auth().signInWithEmailAndPassword(email, password).then(cred => {
+            console.log(cred.user);
+            alert("Signed In Successfully");
+            window.location.replace("aboutus.html");
+        })
+
+    })
+}
+
 
 if(createForm!=null)
 {
@@ -304,7 +356,7 @@ if(createForm!=null)
             console.log("post added successfully");
             
             if(postSubmit != null){
-                window.location.replace("index.html");
+                window.location.replace("aboutus.html");
                 postSubmit.disabled = false;
             }
 
@@ -321,16 +373,32 @@ if(deleteButton !== null){
         const storageRef = firebase.storage().ref();
         await storageRef.child(post.data().fileref).delete().catch(err => console.log(err));
         await firebase.firestore().collection("posts").doc(postId).delete();
-        window.location.replace("index.html");
+        window.location.replace("aboutus.html");
     })
 }
 
 //Check if the DOM is Fully Loaded
+
+if(signupForm !== null){
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      var uid = user.uid;
+      console.log(uid);
+      // ...
+    } else {
+      console.log("Ooopps User is not signed in");
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded",(e)=>{
     getPosts();
     getPost();
-
 })
+
+
 
 
 // const config = {
