@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="./public/main.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <main id="main" class="postContainer">
+        <h1>Post</h1>
+        <button id="editButton" type="button">Edit</button>
+        <div id="editFormContainer"></div>
+
+        <button id="deleteButton" type="button">Delete</button>
+
+        <div id="loading">Load</div>
+
+        <div id="singlePost"></div>
+    </main>
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+    <script src="/Functions/main.js"></script>
+
+</body>
+</html>
