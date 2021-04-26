@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=, initial-scale=1.0">
     <title>SRM BlogSite</title>
     <link rel="stylesheet" href="./public/main.css">
-    <link rel="stylesheet" href="./css/style.css">
     
       <!-- Font Awesome -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
@@ -21,23 +20,18 @@
 
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <h1 class="logo-text"><span>Tech</span>Inspires</h1>
-    </div>
-    <i class="fa fa-bars menu-toggle"></i>
-    <ul class="nav">
-      <li><a href="aboutus.html"><i class="fas fa-home"></i> Home</a></li>
-       <li><a href="create.html"><i class="far fa-edit"></i> Create a new post</a></li>
-      <li><a href="myblogs.html"><i class="fas fa-user-edit"></i> My Blogs</a></li>
-      <li><button id="logout">Logout</button></li>
-
-      <!--<li><a href="register.html">Sign Up</a></li>
-      <li><a href="login.html">Login</a></li> -->
-      
-    </ul>
-  </header>
-  
+    <header>
+        <div class="logo">
+          <h1 class="logo-text"><span>Tech</span>Inspires</h1>
+        </div>
+        <i class="fa fa-bars menu-toggle"></i>
+        <ul class="nav">
+          <li><a href="aboutus.html">Home</a></li>
+          <li>
+            <a href="userinfo.html"><i class="fa fa-user"></i></a>
+          </li>
+        </ul>
+      </header>
 
     <main>
         <form method="POST" id="createForm">
@@ -48,56 +42,12 @@
             <input type="submit" value="Submit" id="postSubmit">
 
         </form>
-        <div id="progress">
+        
         <div id="progressHandler">
             <p>Processing the request, please wait </p>
             <progress id="progressBar" value="" max="100"></progress>
         </div>
-        </div>
     </main>
-
-    <br /><br />
-    <!-- footer -->
-    <div class="footer">
-      <div class="footer-content">
-
-        <div class="footer-section about">
-          <h1 class="logo-text"><span>Tech</span>Inspires</h1>
-          <p>
-            Tech Inspires is a blog conceived for the purpose to inspire young minds
-        </p>
-          <div class="contact">
-            <span><i class="fas fa-phone"></i> &nbsp; 7088234567</span>
-            <span><i class="fas fa-envelope"></i> &nbsp; techinspires@gmail.com</span>
-          </div>
-          <div class="socials">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
-          </div>
-        </div>
-
-
-        <div class="footer-section contact-form">
-          <h2>Contact us</h2>
-          <br>
-          <form id="footer-form"action="index.html" method="post">
-            <input type="email" name="email" class="text-input contact-input" placeholder="Your email address...">
-            <textarea rows="2" name="message" class="text-input contact-input" placeholder="Your message..."></textarea>
-            <button type="submit" id="footer-form-btn" class="btn btn-big contact-btn">
-              <i class="fas fa-envelope"></i> <span>Send</span>
-            </button>
-          </form>
-        </div>
-
-      </div>
-
-      <div class="footer-bottom">
-        &copy; Designed by Tech Inspires
-      </div>
-    </div>
-    <!-- // footer -->
 
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-firestore.js"></script>

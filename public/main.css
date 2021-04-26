@@ -7,6 +7,12 @@ body{
     flex-wrap: wrap;
     justify-content: center;
 }
+#myblogposts{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .post{
     width: 100%;
     max-width: 300px;
@@ -18,7 +24,7 @@ body{
     height:250px;
     background-size: 108%;
 }
-.pos > div{
+.post > div{
   transition: width 0.5s linear 1s;        
 }
 .post > div:hover{
@@ -28,7 +34,9 @@ body{
     text-decoration:none;
     color: black;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 22px;
+    font-weight: 400;
+    font-family: 'Lora', serif;
 }
 
 form {
@@ -51,10 +59,13 @@ form input[type="submit"]{
     background-color: black;
     color:white;
 }
-#progressHandler{
-    display:none;
+#progress{
+    display:flex;
+    justify-content: center;
 }
-
+#progressHandler{
+  display: block;
+}
 
 #loading{
     width : 50%;
@@ -169,4 +180,8 @@ form input[type="submit"]{
   cursor: pointer;
   background-color: black;
   color:white;
+}
+.heading{
+  margin:25px;
+  color:black;
 }

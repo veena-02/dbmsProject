@@ -49,8 +49,9 @@ a {
 }
 
 .btn:hover {
-  color: white !important;
-  background: #005255;
+  color: gold !important;
+  background: rgb(29, 29, 29);
+  cursor:pointer;
 }
 
 .text-input {
@@ -310,7 +311,15 @@ header .menu-toggle {
   color: white !important;
   transition: .25s;
 }
-
+.main-content {
+  margin: 70px;
+  height: 30vw;
+  display:flex !important;
+  justify-content: center !important;
+  background-color: white !important;
+  padding:25px;
+  font-size: 25px;
+}
 .content .main-content .post .post-image {
   width: 40%;
   height: 100%;
@@ -401,7 +410,7 @@ header .menu-toggle {
 /* FOOTER */
 
 .footer {
-  background: #303036;
+  background: black;
   color: #d3d3d3;
   height: 400px;
   position: relative;
@@ -558,7 +567,7 @@ header .menu-toggle {
 
   header ul {
     width: 100%;
-    background: #0E94A0;
+    background: black;
     max-height: 0px;
     overflow: hidden;
   }
@@ -579,7 +588,7 @@ header .menu-toggle {
 
   header ul li ul li a {
     padding: 10px;
-    background: #0E94A0;
+    background:black;
     color: white;
     padding-left: 50px;
   }
@@ -643,8 +652,10 @@ header .menu-toggle {
   }
 }
 #logout{
-  background-color: #1a1a1a;
-  font-size: 20px
+  background-color: gold;
+  color: black;
+  font-size: 20px;
+  margin: 10px;
 }
 
 #editButton, #deleteButton{
@@ -677,4 +688,38 @@ header .menu-toggle {
   font-family: 'Lora';
   font-size: 20px;
   margin:12px;
+}
+@media (max-width:1024px) {
+  .post_innerdiv{
+    display:block;
+  } 
+}
+#footer-form-btn{
+  height: 80px ;
+  background-color: rgb(117, 117, 117);
+  color:black;
+  margin:0px;
+  padding: 0px;
+}
+#footer-form-btn:hover{
+  background-color:rgb(117, 117, 117,0.2);
+  color:black;
+
+  margin:0px;
+  padding: 0px;
+}
+.jumbotron{
+  background-image: url('./../techbg.jpg');
+  height: 250px;
+color: white;
+padding: 25px;
+font-family: 'Candal';
+font-size: 40px;
+text-align: center;
+display: flex;
+justify-content: center;
+align-items:center;
+}
+#login-error, #signup-error{
+  color: red;
 }

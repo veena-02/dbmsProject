@@ -9,6 +9,9 @@ const editButton = document.querySelector("#editButton");
 const deleteButton = document.querySelector("#deleteButton");
 const singlePost = document.querySelector("#singlePost");
 const editFormContainer = document.querySelector("#editFormContainer");
+const loginError = document.querySelector("#login-error");
+const signupError = document.querySelector("#signup-error");
+
 let editMode = false;
 
 let currentTitle;
@@ -16,6 +19,7 @@ let currentId;
 let currentContent;
 let oldPostCover;
 let currUser=false;
+let uid;
 
 const signupForm = document.querySelector("#signup-form");
 const loginForm = document.querySelector("#login-form");
@@ -29,7 +33,26 @@ const getPosts = async()=>{
         postsArray.push({"id":doc.id,"data":doc.data()});
     });   
     createChildren(postsArray);
-    console.log(currUser);
+}
+const getMyBlogPosts = async()=>{
+    
+    let postsArray = [];
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          uid = user.uid;
+          // ...
+        } else {
+          console.log("Ooopps User is not signed in");
+        }
+    });
+    let docs = await firebase.firestore().collection("posts").get().catch(err=>console.log(err));
+    docs.forEach(doc=>{
+        if(doc.data().user === uid)
+        postsArray.push({"id":doc.id,"data":doc.data()});
+    });   
+    myBlogsCreateChildren(postsArray);
 }
 
 const getPost = async() => {
@@ -40,21 +63,21 @@ const getPost = async() => {
     }
 
     let post = await firebase.firestore().collection("posts").doc(postId).get().catch(err=>console.log(err));
-    
+
     currentId = post.id;
     currentContent = post.data().content;
     currentTitle = post.data().title;
     oldPostCover = post.data().fileref;
-
     if(loading !=null){
         loading.innerHTML = "";
     }
-
     if(post && deleteButton != null){
-        deleteButton.style.display = "block";
+        if(uid === post.data().user) deleteButton.style.display = "block";
+        else deleteButton.style.display = "none";
     }
     if(post && editButton != null){
-        deleteButton.style.display = "block";
+        if(uid === post.data().user) editButton.style.display = "block";
+        else editButton.style.display = "none";
     }
 
     console.log(post.data());
@@ -118,6 +141,24 @@ const createChildren = async(arr)=>{
             div.appendChild(cover);
             div .appendChild(anchor);
             posts.appendChild(div);
+        });
+    }
+}
+
+const myBlogsCreateChildren = async(arr)=>{
+    if(myblogposts != null){
+        arr.map(post=>{
+            let div = document.createElement("div");
+            let cover = document.createElement("div");
+            let anchor = document.createElement("a");
+            let anchorNode = document.createTextNode(post.data.title);
+            anchor.setAttribute("href","post.html#/"+post.id);
+            anchor.appendChild(anchorNode);
+            cover.style.backgroundImage="url("+post.data.cover+")";
+            div.classList.add("post");
+            div.appendChild(cover);
+            div .appendChild(anchor);
+            myblogposts.appendChild(div);
         });
     }
 }
@@ -204,6 +245,9 @@ const appendEditForm =async ()=>{
                 const fileRef = await firebase.storage().refFromURL(d);
                 await storageRef.child(document.getElementById("oldCover").value).delete().catch(err=>console.log(err));
                 console.log("prev img deleted successfully");
+
+
+
                 let post={
                     title:document.getElementById("editTitle").value,
                     content:document.getElementById("editContent").value,
@@ -229,6 +273,17 @@ const appendEditForm =async ()=>{
 }
 
 if(editButton != null){
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          uid = user.uid;
+          console.log(uid);
+          // ...
+        } else {
+          console.log("Ooopps User is not signed in");
+        }
+    });
     editButton.addEventListener("click", () => {
         if(editMode == false){
             editMode = true;
@@ -261,6 +316,12 @@ if(signupForm != null){
             console.log(cred);
             alert("Signed Up Successfully");
             window.location.replace("aboutus.html");
+        }).catch((err) =>{
+            let errordiv = document.createElement("div");
+            let errorNode = document.createTextNode(err.message);
+            errordiv.append(errorNode);
+            signupError.append(errordiv);
+
         })
         //signOut
        
@@ -289,7 +350,14 @@ if(loginForm != null){
             console.log(cred.user);
             alert("Signed In Successfully");
             window.location.replace("aboutus.html");
+        }).catch((err) =>{
+            let errordiv = document.createElement("div");
+            let errorNode = document.createTextNode(err.message);
+            errordiv.append(errorNode);
+            loginError.append(errordiv);
+
         })
+        
 
     })
 }
@@ -300,6 +368,17 @@ if(createForm!=null)
     let d;
     createForm.addEventListener("submit",async(e)=>{
         e.preventDefault();
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+              // User is signed in, see docs for a list of available properties
+              // https://firebase.google.com/docs/reference/js/firebase.User
+              uid = user.uid;
+              // ...
+            } else {
+              console.log("Ooopps User is not signed in");
+            }
+        });
+        
         if(document.getElementById("title").value!="" 
             && document.getElementById("content").value!="" 
             && document.getElementById("cover").files[0] !=undefined
@@ -349,7 +428,8 @@ if(createForm!=null)
                 title,
                 content,
                 cover: d,
-                fileref:fileRef._delegate._location.path_
+                fileref:fileRef._delegate._location.path_,
+                user:uid
             }
 
             await firebase.firestore().collection("posts").add(post);
@@ -384,8 +464,7 @@ firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in, see docs for a list of available properties
       // https://firebase.google.com/docs/reference/js/firebase.User
-      var uid = user.uid;
-      console.log(uid);
+      uid = user.uid;
       // ...
     } else {
       console.log("Ooopps User is not signed in");
@@ -396,6 +475,7 @@ firebase.auth().onAuthStateChanged((user) => {
 document.addEventListener("DOMContentLoaded",(e)=>{
     getPosts();
     getPost();
+    getMyBlogPosts();
 })
 
 
